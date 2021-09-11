@@ -1,6 +1,6 @@
 from django.db.models import fields
 from rest_framework import serializers
-from school.models import Aluno, Curso
+from school.models import Aluno, Curso, Matricula
 
 
 class AlunoSerializer(serializers.ModelSerializer):
@@ -11,4 +11,9 @@ class AlunoSerializer(serializers.ModelSerializer):
 class CursoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Curso
+        fields = '__all__'
+
+class MatriculaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Matricula
         fields = '__all__'
