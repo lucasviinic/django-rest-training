@@ -1,7 +1,7 @@
 from django.db.models.query import QuerySet
 from rest_framework import viewsets, generics
 from school.models import Aluno, Curso, Matricula
-from school.serializer import AlunoSerializer, CursoSerializer, MatriculaSerializer, ListaMatriculasAlunoSerializer
+from school.serializer import AlunoSerializer, CursoSerializer, MatriculaSerializer, ListaMatriculasAlunoSerializer, ListaAlunosMatriculadosSerializer
 
 
 class AlunosViewSet(viewsets.ModelViewSet):
@@ -25,3 +25,10 @@ class ListaMatriculasAluno(generics.ListAPIView):
         queryset = Matricula.objects.filter(aluno_id=self.kwargs['pk'])
         return queryset
     serializer_class = ListaMatriculasAlunoSerializer
+
+class ListaAlunosMatriculados(generics.ListAPIView):
+    '''Listando alunos matriculados em um curso'''
+    def get_queryset(self):
+        queryset = Matricula.objects.filter(curso_id=self.kwargs['pk'])
+        return queryset
+    serializer_class = ListaAlunosMatriculadosSerializer
